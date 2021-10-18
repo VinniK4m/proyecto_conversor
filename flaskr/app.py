@@ -18,14 +18,14 @@ def principal():
     return 'APLICACION CONVERSOR'
 
 api = Api(app)
-api.add_resource(VistaRegistro, '/registro')
-api.add_resource(VistaAutenticador, '/autenticacion')
+api.add_resource(VistaRegistro, '/api/auth/signup')
+api.add_resource(VistaAutenticador, '/api/auth/login')
 
-api.add_resource(VistaTareas, '/api/tasks')
+api.add_resource(VistaTareas, '/api/tasks') #2
 
-api.add_resource(VistaTarea, '/api/tasks/<int:id_task>')
+api.add_resource(VistaTarea, '/api/tasks/<int:id_task>') #3
 
-api.add_resource(VistaConversor, '/api/files/<string:filename>')
+api.add_resource(VistaConversor, '/api/files/<string:filename>')#1
 
 
 jwt = JWTManager(app)
