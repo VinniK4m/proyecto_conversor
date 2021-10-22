@@ -4,10 +4,15 @@ from .modelos import db
 from .vistas import VistaRegistro, VistaAutenticador, VistaConversor, VistaTarea, VistaTareas, VistaRegistro
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS, cross_origin
+from flask import Flask, request
+from werkzeug.utils import secure_filename
+import os
+
 
 app = create_app('default')
 app_context = app.app_context()
 app_context.push()
+
 
 db.init_app(app)
 db.create_all()
@@ -26,6 +31,21 @@ api.add_resource(VistaTareas, '/api/tasks') #2
 api.add_resource(VistaTarea, '/api/tasks/<int:id_task>') #3
 
 api.add_resource(VistaConversor, '/api/files/<string:filename>')#1
+
+ #@app.route('/api/upload', methods=["POST"])
+ #def upload_image():
+ #    files = request.files.getlist("archivoup")
+ #    print(files)
+ #    for file in files:
+ #        filename = secure_filename(file.filename)
+ #        try:
+ #            working_directory = os.getcwd()
+ #            file.save(working_directory + "/archivos/" + filename)
+ #        except FileNotFoundError :
+ #            return 'Error, folder does not exist'
+ #    return "200"
+
+
 
 
 jwt = JWTManager(app)
